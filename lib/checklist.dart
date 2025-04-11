@@ -22,8 +22,7 @@ List<Map<String, String>> getQuestions(String auditType) {
   }
 }
 
-final now = DateTime.now();
-final String formattedDate = DateFormat('yyyy-MM-dd hh:mm a').format(now);
+
 
 class ChecklistScreen extends StatefulWidget {
   final String departmentName;
@@ -235,6 +234,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
   }
 
   Future<void> _saveData() async {
+
+  final now = DateTime.now();
+final String formattedDate = DateFormat('yyyy-MM-dd hh:mm a').format(now);
     final dbHelper = DatabaseHelper();
 
     final teamMembersJson = jsonEncode(widget.teamMembers);
@@ -271,6 +273,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
     } else {
       // Create new audit
       checklistResultId = await dbHelper.insertChecklistResult(
+        
         departmentName: widget.departmentName,
         areaName: widget.areaName,
         personName: widget.personName,
