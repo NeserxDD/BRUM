@@ -1,0 +1,24 @@
+﻿# Flutter
+/build/
+/.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# Platforms
+/android/
+/ios/
+/linux/
+/macos/
+/windows/
+/web/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Local files
+local.properties
+*.db
+*.lock
