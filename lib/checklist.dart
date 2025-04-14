@@ -31,8 +31,10 @@ class ChecklistScreen extends StatefulWidget {
   final String auditType;
   final String auditPeriod;
   final List<String> teamMembers;
-  final List<Map<String, String>>? existingQuestions; // Add this
+  final List<Map<String, String>>? existingQuestions; 
   final int? checklistResultId;
+    final String? existingDate; 
+  
 
   const ChecklistScreen({
     required this.departmentName,
@@ -43,6 +45,8 @@ class ChecklistScreen extends StatefulWidget {
     required this.auditPeriod,
     this.existingQuestions,
     this.checklistResultId,
+     this.existingDate, 
+  
     Key? key,
   }) : super(key: key);
 
@@ -236,7 +240,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
   Future<void> _saveData() async {
 
   final now = DateTime.now();
-final String formattedDate = DateFormat('yyyy-MM-dd hh:mm a').format(now);
+final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm a').format(now);
     final dbHelper = DatabaseHelper();
 
     final teamMembersJson = jsonEncode(widget.teamMembers);
@@ -266,6 +270,7 @@ final String formattedDate = DateFormat('yyyy-MM-dd hh:mm a').format(now);
         auditType: widget.auditType,
         auditPeriod: widget.auditPeriod,
         teamMembers: teamMembersJson,
+        
       );
 
       // Delete old question details

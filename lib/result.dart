@@ -23,6 +23,7 @@ class ResultPage extends StatelessWidget {
   final double taikekasuru8Score;
   final double pointsPerQuestion;
   final double maxTotalScore;
+  
 
   final String auditType;
   final String auditPeriod;
@@ -31,7 +32,7 @@ class ResultPage extends StatelessWidget {
   final List<Map<String, String>> questions;
   final int? checklistResultId; // Add this line
 
-  ResultPage({
+  const ResultPage({
     required this.departmentName,
     required this.areaName,
     required this.personName,
@@ -52,8 +53,10 @@ class ResultPage extends StatelessWidget {
     required this.auditPeriod,
     required this.auditType,
     required this.teamMembers,
-     this.checklistResultId,
-  });
+    this.checklistResultId, // Add this
+    Key? key,
+  }) : super(key: key);
+
 
 Future<void> _generateAndSharePDF(BuildContext context) async {
   // Show loading indicator
@@ -499,6 +502,7 @@ FloatingActionButton(
           auditPeriod: auditPeriod,
           existingQuestions: questions, // Pass the current questions
           checklistResultId: checklistResultId, // Pass the ID if available
+        existingDate: formattedDate, 
     
           
         ),

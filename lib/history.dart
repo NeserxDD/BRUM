@@ -248,6 +248,20 @@ class _HistoryPageState extends State<HistoryPage> with RouteAware {
     );
   }
 
+DropdownMenuItem<String> _buildDropdownItem(String? value, String text) {
+  return DropdownMenuItem(
+    value: value,
+    child: Container(
+      constraints: BoxConstraints(maxWidth: 120), // Constrain item width
+      child: Text(
+        text,
+        style: TextStyle(fontSize: 10),
+        overflow: TextOverflow.ellipsis,
+      ),
+    ),
+  );
+}
+
   @override
   Widget build(BuildContext context) {
 
@@ -306,94 +320,59 @@ class _HistoryPageState extends State<HistoryPage> with RouteAware {
                   ),
                   SizedBox(height: 10),
                  // Filter row with two dropdowns
-                  Row(
-                    children: [
-                      Expanded(
-                 
-     flex: 3,
+               Row(
+  children: [
+    Expanded(
+      flex: 3,
+      child: DropdownButtonFormField<String>(
+        value: _selectedAuditTypeFilter,
+      
+        decoration: InputDecoration(
+          labelText: 'Audit Type',
+          labelStyle: TextStyle(fontSize: 10),
         
-                        child: DropdownButtonFormField<String>(
-                      
-                          value: _selectedAuditTypeFilter,
-                          decoration: InputDecoration(
-  
-                            labelText: 'Audit Type',
-                            prefixIcon: Icon(Icons.filter_alt, size: 12),
-                            border: OutlineInputBorder(),
-                                contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                          ),
-                          items: [
-                            DropdownMenuItem(
-                              
-                              value: null,
-                          
-                              child: Text('All audit types', style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Soft S',
-                              child: Text('Soft S', style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Hard S Hospital',
-                              child: Text('Hard S Hospital', style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Hard S Office',
-                              child: Text('Hard S Office', style: TextStyle(fontSize: 10)),
-                            ),
-                          ],
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedAuditTypeFilter = newValue;
-                              _applyFilters();
-                            });
-                          },
-                        ),
-                        ),
-                  
-                      SizedBox(width: 4),
-                      Expanded(
-                     flex: 2,
-                        child: DropdownButtonFormField<String>(
-                         
-                          value: _selectedSortFilter,
-                          decoration: InputDecoration(
-                            
-                            prefixIcon: Icon(Icons.filter_alt, size: 10,),
-                            labelText: 'Sort By',
-                            border: OutlineInputBorder(),
-                                    contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 12),
-                          ),
-                          items: [
-                            DropdownMenuItem(
-                              value: null,
-                              child: Text('Default', style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Department',
-                              child: Text('Department',style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Highest Score',
-                              child: Text('Highest Score', style: TextStyle(fontSize: 10)),
-                            ),
-                            DropdownMenuItem(
-                              value: 'Latest',
-                              child: Text('Latest', style: TextStyle(fontSize: 10)),
-                            ),
-                          ],
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedSortFilter = newValue;
-                              _applyFilters();
-                            });
-                          },
-                        ),
-                          ),
-                      
-                     
-                    ],
-                  ),
+          border: OutlineInputBorder(),
+          contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+          isDense: true,
+        ),
+        items: [
+          _buildDropdownItem(null, 'All audit types'),
+          _buildDropdownItem('Soft S', 'Soft S'),
+          _buildDropdownItem('Hard S Hospital', 'Hard S Hospital'),
+          _buildDropdownItem('Hard S Office', 'Hard S Office'),
+        ],
+        onChanged: (String? newValue) {
+          setState(() => _selectedAuditTypeFilter = newValue);
+        },
+      ),
+    ),
+    SizedBox(width: 4),
+    Expanded(
+      flex: 2,
+      child: DropdownButtonFormField<String>(
+        value: _selectedSortFilter,
+      
+        decoration: InputDecoration(
+         
+          labelText: 'Sort By',
+          labelStyle: TextStyle(fontSize: 10),
+          border: OutlineInputBorder(),
+          contentPadding: EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+          isDense: true,
+        ),
+        items: [
+          _buildDropdownItem(null, 'Default'),
+          _buildDropdownItem('Department', 'Department'),
+          _buildDropdownItem('Highest Score', 'Highest Score'),
+          _buildDropdownItem('Latest', 'Latest'),
+        ],
+        onChanged: (String? newValue) {
+          setState(() => _selectedSortFilter = newValue);
+        },
+      ),
+    ),
+  ],
+)
                 ],
               ),
             ),
