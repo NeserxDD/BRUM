@@ -53,7 +53,7 @@ List<Map<String, String>> questions = [
     "particular":
         "Personal Belongings such as Bag, Umbrella, Jacket, Blazer, etc.",
     "question":
-        "Concealed when not in use maybe placed on the chair or hidden under the table.",
+        "Concealed. Placed in one designated area.",
     "answer": "",
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "6",
@@ -63,10 +63,20 @@ List<Map<String, String>> questions = [
   {
     "particular":
         "Personal Belongings such as Bag, Umbrella, Jacket, Blazer, etc.",
-    "question": "Hung or put in one designated place in the area.",
+    "question":
+        "Allowed inside the shelf, maybe placed on the chair or hidden under the table.",
     "answer": "",
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "7",
+    "remark": "",
+  },
+  {
+    "particular":
+        "Personal Belongings such as Bag, Umbrella, Jacket, Blazer, etc.",
+    "question": "Hung or put in one designated place in the area.",
+    "answer": "",
+    "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
+    "no": "8",
     "remark": "",
   },
 
@@ -76,7 +86,7 @@ List<Map<String, String>> questions = [
         "Labelled, concealed and neatly arranged in their designated place.",
     "answer": "",
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
-    "no": "8",
+    "no": "9",
     "remark": "",
   },
 
@@ -86,7 +96,7 @@ List<Map<String, String>> questions = [
         "Organized. Unserviceable items are hidden or disposed from the waiting area.",
     "answer": "",
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
-    "no": "9",
+    "no": "10",
     "remark": "",
   },
 
@@ -96,9 +106,31 @@ List<Map<String, String>> questions = [
         "Free from unnecessary items such as mugs, tumblers, grocery or market items, and other personal belongings.",
     "answer": "",
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
-    "no": "10",
+    "no": "11",
     "remark": "",
   },
+
+  {
+    "particular": "Office Equipment, Furniture & Fixtures",
+    "question":
+        "Free from unnecessary items such as mugs, tumblers, grocery or market items, and other personal belongings.",
+    "answer": "",
+    "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
+    "no": "12",
+    "remark": "",
+  },
+
+  {
+    "particular": "Office Equipment, Furniture & Fixtures",
+    "question":
+        "With Labels and Proper Tagging.",
+    "answer": "",
+    "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
+    "no": "13",
+    "remark": "",
+  },
+
+
 
   // 2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos
   {
@@ -149,7 +181,7 @@ List<Map<String, String>> questions = [
   },
   {
     "particular": "First Aid Kit or Health Team",
-    "question": "With available supplies, labelled and accessible",
+    "question": "With available supplies, labelled and accessible.",
     "answer": "",
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "6",
@@ -172,20 +204,11 @@ List<Map<String, String>> questions = [
     "remark": "",
   },
   {
-    "particular": "Garbage Bins",
-    "question":
-        "At least two bins in one area labelled with biodegradable & non-biodegradable.",
-    "answer": "",
-    "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
-    "no": "9",
-    "remark": "",
-  },
-  {
     "particular": "Employees Dining Area",
     "question": "In a common designated area",
     "answer": "",
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
-    "no": "10",
+    "no": "9",
     "remark": "",
   },
 
@@ -211,8 +234,9 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular": "Visitor's Area",
-    "question": "Clean and conducive with chairs for clients, if applicable.",
+    "particular": "Comfort Rooms",
+    "question":
+        "With cleanliness/maintenance checklist.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "3",
@@ -221,10 +245,19 @@ List<Map<String, String>> questions = [
 
   {
     "particular": "Visitor's Area",
-    "question": "No unauthorized vendors.",
+    "question": "Clean and conducive with chairs for clients, if applicable.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "4",
+    "remark": "",
+  },
+
+  {
+    "particular": "Visitor's Area",
+    "question": "No unauthorized vendors.",
+    "answer": "",
+    "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
+    "no": "5",
     "remark": "",
   },
 
@@ -234,7 +267,7 @@ List<Map<String, String>> questions = [
     "question": "Plain, clean, dust-free, and no defect.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "5",
+    "no": "6",
     "remark": "",
   },
 
@@ -243,7 +276,7 @@ List<Map<String, String>> questions = [
     "question": "Free from foul and funky smell. Bright and cozy.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "6",
+    "no": "7",
     "remark": "",
   },
 
@@ -252,7 +285,7 @@ List<Map<String, String>> questions = [
     "question": "Free from dirt, trash, liquid, and soil.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "7",
+    "no": "8",
     "remark": "",
   },
 
@@ -261,7 +294,7 @@ List<Map<String, String>> questions = [
     "question": "Labelled, updated preventive maintenance, and dust-free. ",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "8",
+    "no": "9",
     "remark": "",
   },
 
@@ -270,7 +303,16 @@ List<Map<String, String>> questions = [
     "question": "Concealed and not allowed under the table.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "9",
+    "no": "10",
+    "remark": "",
+  },
+
+  {
+    "particular": "Trash Can",
+    "question": "With cover and labelled with biodegradable or non-biodegradable.",
+    "answer": "",
+    "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
+    "no": "11",
     "remark": "",
   },
 
@@ -279,7 +321,7 @@ List<Map<String, String>> questions = [
     "question": "Not overflowing with trash.",
     "answer": "",
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
-    "no": "10",
+    "no": "12",
     "remark": "",
   },
 
@@ -359,7 +401,7 @@ List<Map<String, String>> questions = [
 
   {
     "particular": "Proper Grooming/Wearing of the Prescribed Uniforms and ID's",
-    "question": "All Employees are wearing their ID.",
+    "question": "All Employees are wearing the prescribed uniform or uniform appropriate with their work.\n\n First Monday - ASEAN-inspired\nSecond to Fourth Monday - Filipiniana inspired\nTuesday to Friday and Weekend - Prescribed office uniform for the day.\nDays without prescribed office uniform - Smart Casula as defined under Section IV (H) and illustrated in Section V (A.4)\n\nSmart Casual Attire: Tops: Polo shirts, blouses with collar, blouse/polo, buttoned down polo, buttoned down long sleeves, blazers, or jackets.Bottoms: Skirts (length should not be shorter than one inch above the knee), slacks or maong pants. \n\nException: Mourning and pregnant employees are excused from wearing their uniforms.",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "3",
@@ -368,21 +410,21 @@ List<Map<String, String>> questions = [
 
   {
     "particular": "Proper Grooming/Wearing of the Prescribed Uniforms and ID's",
-    "question":
-        "All Employees are wearing the prescribed uniform or uniform appropriate with their work. \n\nException: Mourning and pregnant employees are excused from wearing their uniforms.",
+    "question": "All Employees are wearing their ID.",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "4",
     "remark": "",
   },
 
+
   {
     "particular": "Foot Wear",
     "question":
-        "Closed shoe, preferably black except for those in the field (breeding station and nursery).",
+        "Leather/Rubber Shoes or any appropriate enclosed shoes, except for those in the field (breeding station and nursery).",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
-    "no": "5",
+    "no": "6",
     "remark": "",
   },
 
@@ -391,7 +433,7 @@ List<Map<String, String>> questions = [
     "question": "No employees are wearing slippers or slides.",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
-    "no": "6",
+    "no": "7",
     "remark": "",
   },
 
@@ -401,7 +443,7 @@ List<Map<String, String>> questions = [
         "Noise levels surrounding the office must not be disturbing to other offices or employees.",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
-    "no": "7",
+    "no": "8",
     "remark": "",
   },
 
@@ -410,7 +452,7 @@ List<Map<String, String>> questions = [
     "question": "Office has a recognition system for 8S practitioners.",
     "answer": "",
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
-    "no": "8",
+    "no": "9",
     "remark": "",
   },
 
@@ -490,8 +532,8 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular": "First Aid Kit/Team",
-    "question": "With available supplies and functional.",
+    "particular": "Fire Extinguishers",
+    "question": "Labelled and is not expired.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "2",
@@ -499,8 +541,8 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular": "A. Office Equipment: Computers and printers",
-    "question": "Unplug when not in use.",
+    "particular": "First Aid Kit/Team",
+    "question": "With available supplies and functional.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "3",
@@ -509,7 +551,7 @@ List<Map<String, String>> questions = [
 
   {
     "particular": "A. Office Equipment: Computers and printers",
-    "question": "No octopus connection.",
+    "question": "Unplug when not in use and free from dust.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "4",
@@ -517,9 +559,8 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular":
-        "B. Office Appliances: TV, Radio, Water dispenser, Refrigerator, Microwave, Air Pot, Coffee Dispenser",
-    "question": "Unplug when not in use.",
+    "particular": "A. Office Equipment: Computers and printers",
+    "question": "No octopus connection.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "5",
@@ -529,7 +570,7 @@ List<Map<String, String>> questions = [
   {
     "particular":
         "B. Office Appliances: TV, Radio, Water dispenser, Refrigerator, Microwave, Air Pot, Coffee Dispenser",
-    "question": "No octopus connection.",
+    "question": "Unplug when not in use and free from dust.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "6",
@@ -537,8 +578,9 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular": "Guest Book",
-    "question": "Placed on receiving areas.",
+    "particular":
+        "B. Office Appliances: TV, Radio, Water dispenser, Refrigerator, Microwave, Air Pot, Coffee Dispenser",
+    "question": "No octopus connection.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "7",
@@ -546,11 +588,20 @@ List<Map<String, String>> questions = [
   },
 
   {
-    "particular": "Floors",
-    "question": "Clean but not slippery.",
+    "particular": "Guest Book / Logbook",
+    "question": "Must be free from dust, updated, and placed on receiving areas.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "8",
+    "remark": "",
+  },
+
+  {
+    "particular": "Floors",
+    "question": "Clean but not slippery. With signages.",
+    "answer": "",
+    "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
+    "no": "9",
     "remark": "",
   },
 
@@ -559,7 +610,7 @@ List<Map<String, String>> questions = [
     "question": "Posted in visible areas.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
-    "no": "9",
+    "no": "10",
     "remark": "",
   },
 
@@ -568,17 +619,17 @@ List<Map<String, String>> questions = [
     "question": "Numbers of emergency hotlines are posted.",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
-    "no": "10",
+    "no": "11",
     "remark": "",
   },
 
   {
     "particular": "Emergency Plan",
     "question":
-        "Guidelines/steps in emergency situation are posted and updated (ie., earthquake, fire, or bomb scare).",
+        "Guidelines/steps in emergency situation are posted and updated (ie., earthquake, fire, or bomb scare). ",
     "answer": "",
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
-    "no": "11",
+    "no": "12",
     "remark": "",
   },
 

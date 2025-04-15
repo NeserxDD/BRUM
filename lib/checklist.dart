@@ -22,8 +22,6 @@ List<Map<String, String>> getQuestions(String auditType) {
   }
 }
 
-
-
 class ChecklistScreen extends StatefulWidget {
   final String departmentName;
   final String areaName;
@@ -31,10 +29,9 @@ class ChecklistScreen extends StatefulWidget {
   final String auditType;
   final String auditPeriod;
   final List<String> teamMembers;
-  final List<Map<String, String>>? existingQuestions; 
+  final List<Map<String, String>>? existingQuestions;
   final int? checklistResultId;
-    final String? existingDate; 
-  
+  final String? existingDate;
 
   const ChecklistScreen({
     required this.departmentName,
@@ -45,8 +42,8 @@ class ChecklistScreen extends StatefulWidget {
     required this.auditPeriod,
     this.existingQuestions,
     this.checklistResultId,
-     this.existingDate, 
-  
+    this.existingDate,
+
     Key? key,
   }) : super(key: key);
 
@@ -70,7 +67,6 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
   double taikekasuru8Score = 0.0;
   double pointsPerQuestion = 0.0;
   double maxTotalScore = 0.0;
-
 
   Map<String, List<String>> questionImages = {};
 
@@ -238,9 +234,9 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
   }
 
   Future<void> _saveData() async {
-
-  final now = DateTime.now();
-final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm a').format(now);
+    final now = DateTime.now();
+    final String formattedDate =
+        widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm a').format(now);
     final dbHelper = DatabaseHelper();
 
     final teamMembersJson = jsonEncode(widget.teamMembers);
@@ -270,7 +266,6 @@ final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm
         auditType: widget.auditType,
         auditPeriod: widget.auditPeriod,
         teamMembers: teamMembersJson,
-        
       );
 
       // Delete old question details
@@ -278,7 +273,6 @@ final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm
     } else {
       // Create new audit
       checklistResultId = await dbHelper.insertChecklistResult(
-        
         departmentName: widget.departmentName,
         areaName: widget.areaName,
         personName: widget.personName,
@@ -320,6 +314,7 @@ final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm
       MaterialPageRoute(
         builder:
             (context) => ResultPage(
+              checklistResultId: checklistResultId,
               departmentName: widget.departmentName,
               areaName: widget.areaName,
               personName: widget.personName,
@@ -530,6 +525,7 @@ final String formattedDate = widget.existingDate ?? DateFormat('yyyy-MM-dd hh:mm
         question["answer"] = "";
         question["remark"] = "";
       }
+
       totalScore = 0;
       maxPossibleScore = 0;
       answeredQuestions = 0;
