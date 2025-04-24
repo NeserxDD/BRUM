@@ -36,6 +36,7 @@ Once all required fields are completed, the "Start Audit" button will become act
 📝 Remarks field for additional notes  
 📊 Real-time scoring display  
 🔢 Questions remaining counter  
+📷 Attach images (camera/gallery) - multiple allowed
 
 **Submission**:  
 ✅ "Submit" button appears when all items are answered  
@@ -58,7 +59,7 @@ Displays the complete audit results including:
 3. **Detailed question responses**:
    - All questions with your answers
    - Any remarks you entered
-
+   - All attached images 
 **Available actions**:
 - : 🏠: **Home button**: Returns to the main screen
 - : ✏️: **Edit button**: Lets you modify your answers

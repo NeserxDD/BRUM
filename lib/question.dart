@@ -1,4 +1,4 @@
-List<Map<String, String>> questions = [
+List<Map<String, dynamic>> questions = [
   {
     "particular": "Pathway and Floor",
     "question": "Free from unnecessary items or blockages.",
@@ -6,6 +6,9 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
+
+
   },
 
   {
@@ -16,6 +19,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -27,6 +31,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -38,6 +43,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -47,6 +53,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -58,6 +65,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -69,6 +77,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular":
@@ -78,6 +87,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -88,6 +98,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -98,6 +109,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "10",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -108,6 +120,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "11",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -118,6 +131,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "12",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -128,6 +142,7 @@ List<Map<String, String>> questions = [
     "category": "1. SORT or 'Senbetsu or Seiri' /Pagliligpit", // Fixed
     "no": "13",
     "remark": "",
+    "imagePaths" : [],
   },
 
 
@@ -141,6 +156,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular": "Office Files, Records and Documents",
@@ -149,6 +165,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -158,6 +175,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -168,6 +186,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -178,6 +197,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular": "First Aid Kit or Health Team",
@@ -186,6 +206,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular": "Wires and Cables",
@@ -194,6 +215,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular": "Units, Service Areas, and Counters",
@@ -202,6 +224,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
   {
     "particular": "Employees Dining Area",
@@ -210,6 +233,7 @@ List<Map<String, String>> questions = [
     "category": "2. Set (In Order) Or 'Seiton' / Pagsasa-Ayos", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 3. Sweep or 'Seiso' /Paglilinis
@@ -221,6 +245,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -231,6 +256,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -241,6 +267,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -250,6 +277,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -259,6 +287,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -269,6 +298,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -278,6 +308,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -287,6 +318,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -296,6 +328,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -305,6 +338,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "10",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -314,6 +348,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "11",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -323,6 +358,7 @@ List<Map<String, String>> questions = [
     "category": "3. Sweep or 'Seiso' /Paglilinis", // Fixed
     "no": "12",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 4. STANDARDIZE or 'Seiketsu' / Pagsasanay
@@ -333,6 +369,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -342,6 +379,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -351,6 +389,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -360,6 +399,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -369,6 +409,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -378,6 +419,7 @@ List<Map<String, String>> questions = [
     "category": "4. STANDARDIZE or 'Seiketsu' / Pagsasanay", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 5.	SUSTAIN or 'Shitsuke' / Pagpapanatili
@@ -388,6 +430,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -397,6 +440,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -406,6 +450,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -415,6 +460,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
 
@@ -426,6 +472,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -435,6 +482,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -445,6 +493,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -454,6 +503,7 @@ List<Map<String, String>> questions = [
     "category": "5.	SUSTAIN or 'Shitsuke' / Pagpapanatili", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 6.	SPIRIT or 'Jishuku'/  Pagrespeto
@@ -464,6 +514,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -473,6 +524,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -482,6 +534,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -491,6 +544,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -501,6 +555,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -510,6 +565,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -519,6 +575,7 @@ List<Map<String, String>> questions = [
     "category": "6.	SPIRIT or 'Jishuku'/  Pagrespeto", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 7.	SAFETY or 'Anzen'/ Pangkaligtasan
@@ -529,6 +586,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -538,6 +596,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -547,6 +606,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -556,6 +616,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -565,6 +626,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -575,6 +637,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -585,6 +648,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -594,6 +658,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -603,6 +668,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -612,6 +678,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "10",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -621,6 +688,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "11",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -631,6 +699,7 @@ List<Map<String, String>> questions = [
     "category": "7.	SAFETY or 'Anzen'/ Pangkaligtasan", // Fixed
     "no": "12",
     "remark": "",
+    "imagePaths" : [],
   },
 
   // 8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan
@@ -643,6 +712,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "1",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -654,6 +724,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "2",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -664,6 +735,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "3",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -674,6 +746,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "4",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -684,6 +757,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "5",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -695,6 +769,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "6",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -705,6 +780,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "7",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -715,6 +791,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "8",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -725,6 +802,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "9",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -735,6 +813,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "10",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -745,6 +824,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "11",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -755,6 +835,7 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "12",
     "remark": "",
+    "imagePaths" : [],
   },
 
   {
@@ -766,5 +847,6 @@ List<Map<String, String>> questions = [
         "8.	STREAMLINE OR SYSTEMATIZE or 'Taikekasuru'/  Pagpapagaan", // Fixed
     "no": "13",
     "remark": "",
+    "imagePaths" : [],
   },
 ];

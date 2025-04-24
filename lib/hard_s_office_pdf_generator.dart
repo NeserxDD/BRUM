@@ -1,4 +1,5 @@
 // pdf_generator.dart
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:pdf/pdf.dart';
@@ -24,7 +25,7 @@ class HardSOfficePdfGenerator {
   final double maxPossibleScore;
   final double maxTotalScore;
   final double pointsPerQuestion;
-  final List<Map<String, String>> questions;
+  final List<Map<String, dynamic>> questions;
   final String auditType;
   final String auditPeriod;
   final List<String> teamMembers;
@@ -54,18 +55,150 @@ class HardSOfficePdfGenerator {
 
   // Method to group questions by category
 
+  List<pw.Page> _buildImagesPages(pw.ThemeData theme, Uint8List logoImage) {
+    final questionsWithImages =
+        questions
+            .where(
+              (q) =>
+                  q["imagePaths"] != null &&
+                  (q["imagePaths"] as List).isNotEmpty,
+            )
+            .toList();
 
+    final pages = <pw.Page>[];
+    final imageRows = <pw.TableRow>[];
 
-  Map<String, List<Map<String, String>>> _groupQuestionsByCategory(
-    List<Map<String, String>> questions,
-  ) {
-    Map<String, List<Map<String, String>>> groupedQuestions = {};
+    // Create table header row
+    final headerRow = pw.TableRow(
+      decoration: pw.BoxDecoration(color: PdfColors.grey200),
+      children: [
+        pw.Padding(
+          padding: const pw.EdgeInsets.all(8.0),
+          child: pw.Text(
+            'Image Code',
+            style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            textAlign: pw.TextAlign.center,
+          ),
+        ),
+        pw.Padding(
+          padding: const pw.EdgeInsets.all(8.0),
+          child: pw.Text(
+            'Image',
+            style: pw.TextStyle(fontWeight: pw.FontWeight.bold),
+            textAlign: pw.TextAlign.center,
+          ),
+        ),
+      ],
+    );
+
+    // Generate all image rows first
+    for (var question in questionsWithImages) {
+      final imagePaths = question["imagePaths"] as List;
+      for (var imagePath in imagePaths) {
+        imageRows.add(
+          pw.TableRow(
+            verticalAlignment: pw.TableCellVerticalAlignment.middle,
+            children: [
+              pw.Padding(
+                padding: const pw.EdgeInsets.all(8.0),
+                child: pw.Text(
+                  'Q${questions.indexOf(question) + 1}',
+                  textAlign: pw.TextAlign.center,
+                ),
+              ),
+              pw.Container(
+                height: 350, // Fixed height for each image row
+                child: pw.Image(
+                  pw.MemoryImage(File(imagePath).readAsBytesSync()),
+                  fit: pw.BoxFit.contain,
+                ),
+              ),
+            ],
+          ),
+        );
+      }
+    }
+
+    // Now paginate the rows
+    const maxRowsPerPage = 2; // Adjust based on your needs
+    for (var i = 0; i < imageRows.length; i += maxRowsPerPage) {
+      final currentRows = imageRows.sublist(
+        i,
+        i + maxRowsPerPage > imageRows.length
+            ? imageRows.length
+            : i + maxRowsPerPage,
+      );
+
+      pages.add(
+        pw.Page(
+          margin: const pw.EdgeInsets.fromLTRB(30, 10, 30, 20),
+          pageFormat: PdfPageFormat.legal,
+          build: (pw.Context context) {
+            return pw.Theme(
+              data: theme,
+              child: pw.Column(
+                children: [
+                  // Header (only on first page)
+                  if (i == 0) ...[
+                    pw.Container(
+                      alignment: pw.Alignment.center,
+                      child: pw.Column(
+                        children: [
+                          pw.Center(
+                            child: pw.Image(
+                              pw.MemoryImage(logoImage),
+                              height: 80,
+                              width: 80,
+                            ),
+                          ),
+                          pw.Text(
+                            'Republic of the Philippines\nPROVINCE OF PANGASINAN\nLingayen',
+                            style: pw.TextStyle(fontSize: 14),
+                            textAlign: pw.TextAlign.center,
+                          ),
+                          pw.SizedBox(height: 15),
+                          pw.Text(
+                            '8S Audit - Attached Images',
+                            style: pw.TextStyle(
+                              fontSize: 18,
+                              fontWeight: pw.FontWeight.bold,
+                            ),
+                            textAlign: pw.TextAlign.center,
+                          ),
+                          pw.SizedBox(height: 20),
+                        ],
+                      ),
+                    ),
+                  ] else ...[
+                    pw.SizedBox(height: 20),
+                  ],
+
+                  // Table with current page's rows
+                  pw.Table(
+                    border: pw.TableBorder.all(),
+                    columnWidths: {
+                      0: const pw.FlexColumnWidth(1),
+                      1: const pw.FlexColumnWidth(3),
+                    },
+                    children: [headerRow, ...currentRows],
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      );
+    }
+
+    return pages;
+  }
+
+  Map<String, List<Map<String, dynamic>>> _groupQuestionsByCategory() {
+    Map<String, List<Map<String, dynamic>>> groupedQuestions = {};
 
     for (var question in questions) {
-      String category = question["category"] ?? "Uncategorized";
-      if (category.isEmpty) {
-        category = "Uncategorized";
-      }
+      String category = question["category"]?.toString() ?? "Uncategorized";
+      if (category.isEmpty) category = "Uncategorized";
 
       if (!groupedQuestions.containsKey(category)) {
         groupedQuestions[category] = [];
@@ -78,7 +211,7 @@ class HardSOfficePdfGenerator {
 
   // Method to calculate the total score for a category
   double _calculateCategoryTotalScore(
-    List<Map<String, String>> questionsInCategory,
+    List<Map<String, dynamic>> questionsInCategory,
   ) {
     double totalCategoryScore = 0.0;
     for (var question in questionsInCategory) {
@@ -136,336 +269,343 @@ class HardSOfficePdfGenerator {
         pw.Page(
           margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 1),
           pageFormat: PdfPageFormat.legal,
-
-
           build: (pw.Context context) {
-            return pw.Stack (
-              
-              
-              children: [ pw.Theme(
-              // Set the default font for all text in this theme
-              data: theme,
+            return pw.Stack(
+              children: [
+                pw.Theme(
+                  // Set the default font for all text in this theme
+                  data: theme,
 
-              child: pw.Column(
-                crossAxisAlignment: pw.CrossAxisAlignment.center,
-                children: [
-                  pw.Container(
-                    alignment: pw.Alignment.center,
-                    child: pw.Column(
-                      children: [
-                        pw.Center(
-                          child: pw.Image(
-                            pw.MemoryImage(image1),
-                            height: 80,
-                            width: 80,
-                          ),
-                        ),
-                        pw.Text(
-                          'Republic of the Philippines\nPROVINCE OF PANGASINAN\nLingayen',
-                          style: pw.TextStyle(fontSize: 14),
-                          textAlign: pw.TextAlign.center,
-                        ),
-
-                        // pw.Text(
-                        //   'HUMAN RESOURCE MANAGEMENT & DEVELOPMENT OFFICE',
-                        //   style: pw.TextStyle(
-                        //     fontSize: 14,
-                        //     fontWeight: pw.FontWeight.bold,
-                        //   ),
-                        //   textAlign: pw.TextAlign.center,
-                        // ),
-                        pw.SizedBox(height: 15),
-                        pw.Text(
-                          '8S of Good Housekeeping Checklist',
-                          style: pw.TextStyle(
-                            fontSize: 18,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                        pw.SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
-
-                  pw.Container(
-                    alignment: pw.Alignment.centerLeft,
-                    child: pw.Column(
-                      children: [
-                        pw.Text(
-                          'Department Name:  $departmentName',
-                          style: pw.TextStyle(
-                            fontSize: 14,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  pw.Container(
-                    alignment: pw.Alignment.centerLeft,
-                    child: pw.Column(
-                      children: [
-                        pw.Text(
-                          'Area Name:  $areaName',
-                          style: pw.TextStyle(
-                            fontSize: 14,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  pw.Container(
-                    alignment: pw.Alignment.centerLeft,
-                    child: pw.Column(
-                      children: [
-                        pw.Text(
-                          'Team Leader:  $personName',
-                          style: pw.TextStyle(
-                            fontSize: 14,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-
-                    pw.Container(
-                    alignment: pw.Alignment.centerLeft,
-                    child: pw.Column(
-                      children: [
-                        pw.Text(
-                          'Team Members:',
-                          style: pw.TextStyle(
-                            fontSize: 14,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                        ...teamMembers
-                            .map(
-                              (member) => pw.Text(
-                                '- $member',
-                                style: const pw.TextStyle(fontSize: 14),
-                                textAlign: pw.TextAlign.center,
-                              ),
-                            )
-                            .toList(),
-                      ],
-                    ),
-                  ),
-
-                  pw.Container(
-                    alignment: pw.Alignment.centerLeft,
-                    child: pw.Column(
-                      children: [
-                        pw.Text(
-                          'Date Audited:  $formattedDate',
-                          style: pw.TextStyle(
-                            fontSize: 14,
-                            fontWeight: pw.FontWeight.bold,
-                          ),
-                          textAlign: pw.TextAlign.center,
-                        ),
-                      ],
-                    ),
-                  ),
-                  pw.SizedBox(height: 6),
-                  pw.Table(
-                    border: pw.TableBorder.all(),
-                    columnWidths: {
-                      0: const pw.FlexColumnWidth(3), // Wider for category name
-                      1: const pw.FlexColumnWidth(1), // Narrower for score
-                    },
+                  child: pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
                     children: [
-                      // Table Header
-                      pw.TableRow(
+                      pw.Container(
+                        alignment: pw.Alignment.center,
+                        child: pw.Column(
+                          children: [
+                            pw.Center(
+                              child: pw.Image(
+                                pw.MemoryImage(image1),
+                                height: 80,
+                                width: 80,
+                              ),
+                            ),
+                            pw.Text(
+                              'Republic of the Philippines\nPROVINCE OF PANGASINAN\nLingayen',
+                              style: pw.TextStyle(fontSize: 14),
+                              textAlign: pw.TextAlign.center,
+                            ),
+
+                            pw.SizedBox(height: 15),
+                            pw.Text(
+                              '8S of Good Housekeeping Checklist',
+                              style: pw.TextStyle(
+                                fontSize: 18,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                            pw.SizedBox(height: 10),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Department Name:  $departmentName',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Area Name:  $areaName',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Team Leader:  $personName',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Team Members:',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                            ...teamMembers
+                                .map(
+                                  (member) => pw.Text(
+                                    '- $member',
+                                    style: const pw.TextStyle(fontSize: 14),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                )
+                                .toList(),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Date Audited:  $formattedDate',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                      pw.SizedBox(height: 6),
+                      pw.Table(
+                        border: pw.TableBorder.all(),
+                        columnWidths: {
+                          0: const pw.FlexColumnWidth(
+                            3,
+                          ), // Wider for category name
+                          1: const pw.FlexColumnWidth(1), // Narrower for score
+                        },
                         children: [
-                          pw.Container(
-                            padding: const pw.EdgeInsets.all(12.0),
-                            child: pw.Text(
-                              'Category',
-                              style: pw.TextStyle(
-                                fontWeight: pw.FontWeight.bold,
-                                fontSize: 14,
+                          // Table Header
+                          pw.TableRow(
+                            children: [
+                              pw.Container(
+                                padding: const pw.EdgeInsets.all(12.0),
+                                child: pw.Text(
+                                  'Category',
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: pw.TextAlign.center,
+                                ),
                               ),
-                              textAlign: pw.TextAlign.center,
-                            ),
+                              pw.Container(
+                                padding: const pw.EdgeInsets.all(12.0),
+                                child: pw.Text(
+                                  'Score',
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
-                          pw.Container(
-                            padding: const pw.EdgeInsets.all(12.0),
-                            child: pw.Text(
-                              'Score',
-                              style: pw.TextStyle(
-                                fontWeight: pw.FontWeight.bold,
-                                fontSize: 14,
+
+                          ...categoryScores.entries.map((entry) {
+                            return pw.TableRow(
+                              children: [
+                                pw.Container(
+                                  padding: const pw.EdgeInsets.all(12.0),
+                                  child: pw.Text(
+                                    entry.key, // Category name
+                                    style: pw.TextStyle(fontSize: 14),
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ),
+                                pw.Container(
+                                  padding: const pw.EdgeInsets.all(12.0),
+                                  child: pw.Text(
+                                    entry.value.toStringAsFixed(2), // Score
+                                    style: pw.TextStyle(fontSize: 14),
+
+                                    textAlign: pw.TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            );
+                          }).toList(),
+
+                          pw.TableRow(
+                            children: [
+                              pw.Container(
+                                padding: const pw.EdgeInsets.all(12.0),
+                                child: pw.Text(
+                                  'Total', // Score
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: pw.TextAlign.center,
+                                ),
                               ),
-                              textAlign: pw.TextAlign.center,
-                            ),
+
+                              pw.Container(
+                                padding: const pw.EdgeInsets.all(12.0),
+                                child: pw.Text(
+                                  '${totalScore.toStringAsFixed(2)} / ${maxTotalScore.toStringAsFixed(0)}', // Score
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                    fontSize: 14,
+                                  ),
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),
 
-                      ...categoryScores.entries.map((entry) {
-                        return pw.TableRow(
+                      pw.SizedBox(height: 60),
+                      pw.Expanded(
+                        child: pw.Row(
+                          mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
                           children: [
-                            pw.Container(
-                              padding: const pw.EdgeInsets.all(12.0),
-                              child: pw.Text(
-                                entry.key, // Category name
-                                style: pw.TextStyle(fontSize: 14),
-                                textAlign: pw.TextAlign.center,
-                              ),
-                            ),
-                            pw.Container(
-                              padding: const pw.EdgeInsets.all(12.0),
-                              child: pw.Text(
-                                entry.value.toStringAsFixed(2), // Score
-                                style: pw.TextStyle(fontSize: 14),
+                            pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.Text(
+                                  'Prepared by:',
+                                  textAlign: pw.TextAlign.left,
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                  ),
+                                ),
 
-                                textAlign: pw.TextAlign.center,
-                              ),
+                                pw.SizedBox(height: 20),
+                                pw.Text(
+                                  '________________________',
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                                pw.Text(
+                                  'Signature over printed name',
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                              ],
+                            ),
+
+                            // Noted by section
+                            pw.Column(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.Text(
+                                  'Noted by:',
+                                  textAlign: pw.TextAlign.left,
+                                  style: pw.TextStyle(
+                                    fontWeight: pw.FontWeight.bold,
+                                  ),
+                                ),
+                                pw.SizedBox(height: 20),
+
+                                pw.Text('________________________'),
+                                pw.Text(
+                                  ' (Supervisor / Team leader)',
+                                  textAlign: pw.TextAlign.center,
+                                ),
+                                pw.Text('Signature over printed name'),
+                              ],
                             ),
                           ],
-                        );
-                      }).toList(),
-
-                      pw.TableRow(
-                        children: [
-                          pw.Container(
-                            padding: const pw.EdgeInsets.all(12.0),
-                            child: pw.Text(
-                              'Total', // Score
-                              style: pw.TextStyle(
-                                fontWeight: pw.FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                              textAlign: pw.TextAlign.center,
-                            ),
-                          ),
-
-                          pw.Container(
-                            padding: const pw.EdgeInsets.all(12.0),
-                            child: pw.Text(
-                              '${totalScore.toStringAsFixed(2)} / ${maxTotalScore.toStringAsFixed(0)}', // Score
-                              style: pw.TextStyle(
-                                fontWeight: pw.FontWeight.bold,
-                                fontSize: 14,
-                              ),
-                              textAlign: pw.TextAlign.center,
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ],
                   ),
+                ),
 
-                  pw.SizedBox(height: 60),
-                  pw.Expanded(
-                    child: pw.Row(
-                      mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
-                      children: [
-                        pw.Column(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          children: [
-                            pw.Text(
-                              'Prepared by:',
-                              textAlign: pw.TextAlign.left, style: pw.TextStyle(fontWeight: pw.FontWeight.bold)
-                            ),
-                            
-                            pw.SizedBox(height: 20),
-                            pw.Text(
-                              '________________________',
-                              textAlign: pw.TextAlign.center,
-                            ),
-                            pw.Text(
-                              'Signature over printed name',
-                              textAlign: pw.TextAlign.center,
-                            ),
-                          ],
-                        ),
+                pw.Positioned(
+                  bottom: 0, // Now touches the page edge
+                  left: 0,
+                  right: 0,
 
-                        // Noted by section
-                        pw.Column(
-                          crossAxisAlignment: pw.CrossAxisAlignment.start,
-                          children: [
-                            pw.Text('Noted by:', textAlign: pw.TextAlign.left, style: pw.TextStyle(fontWeight: pw.FontWeight.bold)),
-                            pw.SizedBox(height: 20),
-
-                            pw.Text('________________________'),
-                            pw.Text(
-                              ' (Supervisor / Team leader)',
-                              textAlign: pw.TextAlign.center,
-                            ),
-                            pw.Text('Signature over printed name'),
-                          ],
-                        ),
-
-                        ],
-
-
-
-
-                      
+                 child: pw.Row(
+                  mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
+children: [
+ pw.Container(
+                    height: 15, // Matches reduced bottom margin
+                    alignment: pw.Alignment.bottomLeft,
+                    child: pw.Text(
+                      'Generated by Brum apk',
+                      style: const pw.TextStyle(
+                        fontSize: 8,
+                        color: PdfColors.black,
+                      ),
                     ),
                   ),
-                ],
-              ),
 
+ pw.Container(
+                    height: 15, // Matches reduced bottom margin
+                    alignment: pw.Alignment.center,
+                    child: pw.Text(
+                      '8s of Good Housekeeping Checklist',
+                      style: const pw.TextStyle(
+                        fontSize: 8,
+                        color: PdfColors.black,
+                      ),
+                    ),
+                  ),
 
-            ),
+ pw.Container(
+                    height: 15, // Matches reduced bottom margin
+                    alignment: pw.Alignment.bottomRight,
+                    child: pw.Text(
+                      'EGCD KCP',
+                      style: const pw.TextStyle(
+                        fontSize: 8,
+                        color: PdfColors.black,
+                      ),
+                    ),
+                  ),                 
 
-//  pw.Positioned(
-//             bottom: 10,
-//             left: 0,
-//             right: 0,
-//             child: 
-//               pw.Text(
-//                 'Generated by brum apk',
-//                 style: pw.TextStyle(fontSize: 10, color: const PdfColor.fromInt(0xFF000000)),
-//             ),
-//           ),
+],
+                 ),
 
-
- pw.Positioned(
-            bottom: 0, // Now touches the page edge
-            left: 0,
-            right: 0,
-            child: pw.Container(
-              height: 15, // Matches reduced bottom margin
-              alignment: pw.Alignment.center,
-              child: pw.Text(
-                'Generated by brum apk',
-                style: const pw.TextStyle(
-                  fontSize: 8,
-                  color: PdfColors.black,
+                  
                 ),
-              ),
-            ),
-          ),
-
               ],
-
             );
-           
           },
-          
         ),
-     
       );
 
       // Group questions by category
-      final groupedQuestions = _groupQuestionsByCategory(questions);
+      final groupedQuestions = _groupQuestionsByCategory();
 
       // Add pages for each category
       groupedQuestions.forEach((category, questionsInCategory) {
-        // Calculate the total score for the category
         double categoryTotalScore = _calculateCategoryTotalScore(
           questionsInCategory,
         );
@@ -497,14 +637,7 @@ class HardSOfficePdfGenerator {
                             style: pw.TextStyle(fontSize: 14),
                             textAlign: pw.TextAlign.center,
                           ),
-                          // pw.Text(
-                          //   'HUMAN RESOURCE MANAGEMENT & DEVELOPMENT OFFICE',
-                          //   style: pw.TextStyle(
-                          //     fontSize: 14,
-                          //     fontWeight: pw.FontWeight.bold,
-                          //   ),
-                          //   textAlign: pw.TextAlign.center,
-                          // ),
+
                           pw.SizedBox(height: 15), // Add spacing
 
                           pw.Row(
@@ -763,6 +896,15 @@ class HardSOfficePdfGenerator {
         );
       });
 
+      // Change it to:
+      if (questions.any(
+        (q) => q["imagePaths"] != null && (q["imagePaths"] as List).isNotEmpty,
+      )) {
+        final imagePages = _buildImagesPages(theme, image1);
+        for (final page in imagePages) {
+          pdf.addPage(page); // Add each page one by one
+        }
+      }
       final directory = await _getPublicDownloadsDirectory();
       if (directory == null) {
         throw Exception("Could not access Downloads directory");

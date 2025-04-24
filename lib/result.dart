@@ -1,4 +1,6 @@
 // result_page.dart
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:project1/checklist.dart';
 import 'package:project1/history.dart';
@@ -29,7 +31,7 @@ class ResultPage extends StatelessWidget {
   final String auditPeriod;
   final List<String> teamMembers;
 
-  final List<Map<String, String>> questions;
+  final List<Map<String, dynamic>> questions;
   final int? checklistResultId; // Add this line
 
   const ResultPage({
@@ -100,7 +102,7 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
        
       ).generateAndSharePdf();
     } 
-    else if (auditType == 'Hard S Hospital') {
+   if (auditType == 'Hard S Hospital') {
       await HardSHospitalPdfGenerator(
           departmentName: departmentName,
           areaName: areaName,
@@ -187,27 +189,26 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
   }
 }
 
-  Map<String, Map<String, List<Map<String, String>>>>
-  _groupQuestionsByCategoryAndParticular() {
-    Map<String, Map<String, List<Map<String, String>>>> groupedQuestions = {};
+ Map<String, Map<String, List<Map<String, dynamic>>>> _groupQuestionsByCategoryAndParticular() {
+  Map<String, Map<String, List<Map<String, dynamic>>>> groupedQuestions = {};
 
-    for (var question in questions) {
-      String category = question["category"] ?? "Uncategorized";
-      String particular = question["particular"] ?? "No Particular";
+  for (var question in questions) {
+    String category = question["category"] ?? "Uncategorized";
+    String particular = question["particular"] ?? "No Particular";
 
-      if (!groupedQuestions.containsKey(category)) {
-        groupedQuestions[category] = {};
-      }
-
-      if (!groupedQuestions[category]!.containsKey(particular)) {
-        groupedQuestions[category]![particular] = [];
-      }
-
-      groupedQuestions[category]![particular]!.add(question);
+    if (!groupedQuestions.containsKey(category)) {
+      groupedQuestions[category] = {};
     }
 
-    return groupedQuestions;
+    if (!groupedQuestions[category]!.containsKey(particular)) {
+      groupedQuestions[category]![particular] = [];
+    }
+
+    groupedQuestions[category]![particular]!.add(question);
   }
+
+  return groupedQuestions;
+}
 
   @override
   @override
@@ -396,7 +397,7 @@ SizedBox(height: 4),
                 // Display questions grouped by category and particular
                 ...groupedQuestions.entries.map((categoryEntry) {
                   String category = categoryEntry.key;
-                  Map<String, List<Map<String, String>>> particulars =
+                  Map<String, List<Map<String, dynamic>>> particulars =
                       categoryEntry.value;
 
                   return Column(
@@ -415,7 +416,7 @@ SizedBox(height: 4),
                       ),
                       ...particulars.entries.map((particularEntry) {
                         String particular = particularEntry.key;
-                        List<Map<String, String>> questionsInParticular =
+                        List<Map<String, dynamic>> questionsInParticular =
                             particularEntry.value;
 
                         return Card(
@@ -439,32 +440,93 @@ SizedBox(height: 4),
                                 ),
                                 Divider(thickness: 1.5),
 
-                                ...questionsInParticular.map((question) {
-                                  return Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      SizedBox(height: 8),
-                                      Text(
-                                        question["question"] ?? "No question",
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      SizedBox(height: 8),
-                                      Text(
-                                        'Answer: ${question["answer"] ?? "No answer"}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      Text(
-                                        'Points: ${question["answer"] == "Yes" ? pointsPerQuestion.toStringAsFixed(2) : 0}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      Text(
-                                        'Remark: ${question["remark"] ?? " "}',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                    ],
-                                  );
-                                }).toList(),
+                             ...questionsInParticular.map((question) {
+  return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      SizedBox(height: 8),
+      Text(
+        question["question"] ?? "No question",
+        style: TextStyle(fontSize: 16),
+      ),
+      SizedBox(height: 8),
+      Text(
+        'Answer: ${question["answer"] ?? "No answer"}',
+        style: TextStyle(fontSize: 16),
+      ),
+      Text(
+        'Points: ${question["answer"] == "Yes" ? pointsPerQuestion.toStringAsFixed(2) : 0}',
+        style: TextStyle(fontSize: 16),
+      ),
+      Text(
+        'Remark: ${question["remark"] ?? " "}',
+        style: TextStyle(fontSize: 16),
+      ),
+      
+      // Add this new section for images
+      if (question["imagePaths"] != null && (question["imagePaths"] as List).isNotEmpty) ...[
+        SizedBox(height: 16),
+        Text(
+          'Attached Images:',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        SizedBox(height: 8),
+        Table(
+          border: TableBorder.all(),
+          columnWidths: {
+            0: FlexColumnWidth(1),
+            1: FlexColumnWidth(3),
+          },
+          children: [
+            TableRow(
+              decoration: BoxDecoration(color: Colors.grey[200]),
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Image Code",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Image",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ],
+            ),
+            ...List<TableRow>.generate(
+              (question["imagePaths"] as List).length,
+              (index) => TableRow(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'q${questions.indexOf(question)+1}',
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Image.file(
+                      File((question["imagePaths"] as List)[index]),
+                      height: 100,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ],
+    ],
+  );
+}).toList(),
                               ],
                             ),
                           ),
@@ -483,7 +545,7 @@ floatingActionButton: Column(
   mainAxisAlignment: MainAxisAlignment.end,
   children: [
     FloatingActionButton(
-      onPressed: () => _generateAndSharePDF(context),
+      onPressed: () =>   _generateAndSharePDF(context),
       backgroundColor: Color.fromARGB(255, 45, 103, 161),
       child: Icon(Icons.picture_as_pdf, color: Colors.white),
     ),
@@ -502,7 +564,7 @@ FloatingActionButton(
           auditPeriod: auditPeriod,
           existingQuestions: questions, // Pass the current questions
           checklistResultId: checklistResultId, // Pass the ID if available
-        existingDate: formattedDate, 
+          existingDate: formattedDate, 
     
           
         ),

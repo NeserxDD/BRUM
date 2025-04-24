@@ -417,6 +417,23 @@ DropdownMenuItem<String> _buildDropdownItem(String? value, String text) {
                           List<Map<String, dynamic>> questionDetails =
                               await dbHelper.getQuestionDetails(result['id']);
 
+  // Get images for each question
+  List<Map<String, dynamic>> questionsWithImages = [];
+  for (var detail in questionDetails) {
+    List<Map<String, dynamic>> images = 
+        await dbHelper.getQuestionImages(detail['id']);
+    questionsWithImages.add({
+      "particular": detail['particular'] as String,
+      "question": detail['question'] as String,
+      "answer": detail['answer'] as String,
+      "category": detail['category'] as String,
+      "no": detail['no'] as String,
+      "remark": detail['remark'] as String,
+      "imagePaths": images.map((img) => img['imagePath'] as String).toList(),
+    });
+  }
+
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -453,19 +470,8 @@ DropdownMenuItem<String> _buildDropdownItem(String? value, String text) {
                                 teamMembers: _parseTeamMembers(
                                   result['teamMembers'],
                                 ),
-                                questions: questionDetails.map((detail) {
-                                  return {
-                                    "particular":
-                                        detail['particular'] as String,
-                                    "question":
-                                        detail['question'] as String,
-                                    "answer": detail['answer'] as String,
-                                    "category":
-                                        detail['category'] as String,
-                                    "no": detail['no'] as String,
-                                    "remark": detail['remark'] as String,
-                                  };
-                                }).toList(),
+
+        questions: questionsWithImages,
                                 checklistResultId: result['id'],
                               ),
                             ),
