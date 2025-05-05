@@ -102,7 +102,7 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
        
       ).generateAndSharePdf();
     } 
-   if (auditType == 'Hard S Hospital') {
+   else if (auditType == 'Hard S Hospital') {
       await HardSHospitalPdfGenerator(
           departmentName: departmentName,
           areaName: areaName,
@@ -124,8 +124,6 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
           auditType: auditType,
           auditPeriod: auditPeriod,
           teamMembers: teamMembers,
-
-      
       ).generateAndSharePdf();
     } 
     else if (auditType == 'Soft S') {
@@ -151,7 +149,6 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
           auditPeriod: auditPeriod,
           teamMembers: teamMembers,
 
-        // pass all parameters
       ).generateAndSharePdf();
     }
 
@@ -210,7 +207,8 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
   return groupedQuestions;
 }
 
-  @override
+
+
   @override
   Widget build(BuildContext context) {
     final Map<String, double> categoryScores = {
@@ -227,7 +225,20 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
     // Group questions by category and particular
     final groupedQuestions = _groupQuestionsByCategoryAndParticular();
 
-    return Scaffold(
+
+
+ Future<bool> _handleBack() async {
+    Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HistoryPage()),
+    );
+    return false; // Prevent default back behavior
+  }
+
+return WillPopScope(
+
+  onWillPop: _handleBack,
+    child:  Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromARGB(255, 45, 103, 161),
         iconTheme: IconThemeData(color: Colors.white),
@@ -285,7 +296,7 @@ Future<void> _generateAndSharePDF(BuildContext context) async {
                   'Team Leader: $personName',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
                 ),
-SizedBox(height: 4),
+              SizedBox(height: 4),
                 Text(
                   'Team Members:',
                   style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
@@ -298,11 +309,6 @@ SizedBox(height: 4),
                                   ),
                                 )
                                 .toList(),
-
-
-
-
-
                 SizedBox(height: 4),
                 Text(
                   'Date: $formattedDate',
@@ -506,7 +512,7 @@ SizedBox(height: 4),
                   Padding(
                     padding: EdgeInsets.all(8.0),
                     child: Text(
-                      'q${questions.indexOf(question)+1}',
+                      'I-${questions.indexOf(question)+1}',
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -514,7 +520,7 @@ SizedBox(height: 4),
                     padding: EdgeInsets.all(8.0),
                     child: Image.file(
                       File((question["imagePaths"] as List)[index]),
-                      height: 100,
+                      height: 200,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -589,6 +595,7 @@ FloatingActionButton(
     ),
   ],
 ),
+    ),
     );
   }
 }

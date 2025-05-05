@@ -330,7 +330,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
           await dbHelper.insertQuestionImage(
             questionDetailId: questionId,
             imagePath: imagePath,
-            imageCode: 'q${i + 1}',
+            imageCode: 'I-${i + 1}',
           );
         }
       }
@@ -383,7 +383,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
           backgroundColor: const Color.fromARGB(255, 45, 103, 161),
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            '${widget.auditType} Audit Questions',
+            'Audit Questions',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
@@ -679,7 +679,7 @@ class __QuestionItemState extends State<_QuestionItem> {
   void initState() {
     super.initState();
     _remarkController.text = widget.question["remark"] ?? "";
-    _imageCode = 'q${widget.questionIndex + 1}';
+    _imageCode = 'I-${widget.questionIndex + 1}';
     _imagePaths = List<String>.from(widget.question["imagePaths"] ?? []);
   }
 
@@ -870,7 +870,7 @@ class __QuestionItemState extends State<_QuestionItem> {
                       right: 0,
                       child: IconButton(
                         icon: const Icon(Icons.close, color: Colors.red),
-                        onPressed: () {
+                        onPressed: () { 
                           setState(() {
                             _imagePaths.removeAt(index);
                             widget.question["imagePaths"] = _imagePaths;

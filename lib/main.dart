@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
       navigatorObservers: [routeObserver], // Add RouteObserver
       theme: ThemeData(
         scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
-        textTheme: GoogleFonts.montserratTextTheme(Theme.of(context).textTheme),
+       textTheme: GoogleFonts.montserratTextTheme(
+          Theme.of(context).textTheme,
+        ), // Applies Montserrat globally
       ),
       home: HistoryPage(),
      

@@ -361,10 +361,10 @@ DropdownMenuItem<String> _buildDropdownItem(String? value, String text) {
           isDense: true,
         ),
         items: [
-          _buildDropdownItem(null, 'Default'),
+          _buildDropdownItem(null, 'Latest'),
           _buildDropdownItem('Department', 'Department'),
           _buildDropdownItem('Highest Score', 'Highest Score'),
-          _buildDropdownItem('Latest', 'Latest'),
+   
         ],
         onChanged: (String? newValue) {
           setState(() => _selectedSortFilter = newValue);

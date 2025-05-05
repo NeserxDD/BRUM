@@ -102,7 +102,7 @@ class PdfGenerator {
               pw.Padding(
                 padding: const pw.EdgeInsets.all(8.0),
                 child: pw.Text(
-                  'Q${questions.indexOf(question) + 1}',
+                  'I-${questions.indexOf(question) + 1}',
                   textAlign: pw.TextAlign.center,
                 ),
               ),
@@ -917,6 +917,6 @@ children: [
   String _getFileName() {
     DateTime dateTime = DateFormat('yyyy-MM-dd hh:mm a').parse(formattedDate);
     final String newFormattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
-    return "${newFormattedDate}_${personName}-${departmentName}-${areaName}.pdf";
+    return "${newFormattedDate}_${personName}-${departmentName}.pdf";
   }
 }

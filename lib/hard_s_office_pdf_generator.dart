@@ -102,7 +102,7 @@ class HardSOfficePdfGenerator {
               pw.Padding(
                 padding: const pw.EdgeInsets.all(8.0),
                 child: pw.Text(
-                  'Q${questions.indexOf(question) + 1}',
+                  'I-${questions.indexOf(question) + 1}',
                   textAlign: pw.TextAlign.center,
                 ),
               ),
