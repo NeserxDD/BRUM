@@ -28,10 +28,18 @@ class _NewAuditScreenState extends State<NewAuditScreen> {
   ];
 
   final List<String> _semesters = [
-    '1st Sem',
-    '2nd Sem',
-    '3rd Sem',
-    '4th Sem'
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+  'September',
+  'October',
+  'November',
+  'December',
   ];
 
   Future<void> _selectYear() async {
@@ -57,7 +65,7 @@ class _NewAuditScreenState extends State<NewAuditScreen> {
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: const Text('Select Semester'),
+          title: const Text('Select Month'),
           children: _semesters.map((sem) {
             return SimpleDialogOption(
               onPressed: () {
@@ -237,7 +245,7 @@ class _NewAuditScreenState extends State<NewAuditScreen> {
               children: [
                 Expanded(
                   child: ListTile(
-                    title: Text(_selectedSemester ?? 'Select Semester'),
+                    title: Text(_selectedSemester ?? 'Select Month'),
                     trailing: Icon(Icons.arrow_forward_ios, color: Colors.blue[700]),
                     onTap: _selectSemester,
                   ),

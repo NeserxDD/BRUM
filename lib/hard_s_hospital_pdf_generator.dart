@@ -7,6 +7,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:share_plus/share_plus.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+const PdfPageFormat folio = PdfPageFormat(8.5 * PdfPageFormat.inch, 13 * PdfPageFormat.inch);
 
 class HardSHospitalPdfGenerator {
   final String departmentName;
@@ -29,6 +30,7 @@ class HardSHospitalPdfGenerator {
   final String auditType;
   final String auditPeriod;
   final List<String> teamMembers;
+  
 
   HardSHospitalPdfGenerator({
     required this.departmentName,
@@ -132,7 +134,7 @@ class HardSHospitalPdfGenerator {
       pages.add(
         pw.Page(
           margin: const pw.EdgeInsets.fromLTRB(30, 10, 30, 20),
-          pageFormat: PdfPageFormat.legal,
+          pageFormat: folio,
           build: (pw.Context context) {
             return pw.Theme(
               data: theme,
@@ -268,8 +270,8 @@ class HardSHospitalPdfGenerator {
 
       pdf.addPage(
         pw.Page(
-          margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 1),
-          pageFormat: PdfPageFormat.legal,
+          margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 3),
+          pageFormat: folio,
           build: (pw.Context context) {
             return pw.Stack(
               children: [
@@ -299,7 +301,7 @@ class HardSHospitalPdfGenerator {
 
                             pw.SizedBox(height: 15),
                             pw.Text(
-                              '8S of Good Housekeeping Checklist',
+                              '8S of Good Housekeeping Checklist - HARD S HOSPITAL',
                               style: pw.TextStyle(
                                 fontSize: 18,
                                 fontWeight: pw.FontWeight.bold,
@@ -380,6 +382,22 @@ class HardSHospitalPdfGenerator {
                                   ),
                                 )
                                 .toList(),
+                          ],
+                        ),
+                      ),
+
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Audit Period:  $auditPeriod',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
                           ],
                         ),
                       ),
@@ -507,7 +525,7 @@ class HardSHospitalPdfGenerator {
                                   ),
                                 ),
 
-                                pw.SizedBox(height: 20),
+                                pw.SizedBox(height: 30),
                                 pw.Text(
                                   '________________________',
                                   textAlign: pw.TextAlign.center,
@@ -530,7 +548,7 @@ class HardSHospitalPdfGenerator {
                                     fontWeight: pw.FontWeight.bold,
                                   ),
                                 ),
-                                pw.SizedBox(height: 20),
+                                pw.SizedBox(height: 30),
 
                                 pw.Text('________________________'),
                                 pw.Text(
@@ -548,7 +566,7 @@ class HardSHospitalPdfGenerator {
                 ),
 
                 pw.Positioned(
-                  bottom: 0,
+                  bottom: 2,
                   left: 0,
                   right: 0,
 
@@ -583,7 +601,7 @@ class HardSHospitalPdfGenerator {
                         height: 15, // Matches reduced bottom margin
                         alignment: pw.Alignment.bottomRight,
                         child: pw.Text(
-                          '.ED-KC-EV',
+                          'ED|KC|EV',
                           style: const pw.TextStyle(
                             fontSize: 8,
                             color: PdfColors.black,
@@ -611,7 +629,7 @@ class HardSHospitalPdfGenerator {
         pdf.addPage(
           pw.Page(
             margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 0),
-            pageFormat: PdfPageFormat.legal,
+            pageFormat:folio,
             build: (pw.Context context) {
               return pw.Theme(
                 // Set the default font for all text in this theme
@@ -931,6 +949,6 @@ class HardSHospitalPdfGenerator {
   String _getFileName() {
     DateTime dateTime = DateFormat('yyyy-MM-dd hh:mm a').parse(formattedDate);
     final String newFormattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
-    return "${newFormattedDate}_${personName}-${departmentName}-${areaName}.pdf";
+    return "HARD_S-Hospital_${newFormattedDate}_${personName}-${departmentName}-${areaName}.pdf";
   }
 }

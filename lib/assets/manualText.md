@@ -1,6 +1,6 @@
 
 
-# 📋 5S Audit Tool Manual  
+# 📋 8S Audit Tool Manual  
 *Internal Audit Services Office - Province of Pangasinan*  
 **Version**: 1.0.0  
 *Built with Flutter & SQLite*
@@ -16,7 +16,7 @@ The home page displays your past saved audits. You can:
 This is where you configure a new audit:
 
 1. **Select audit type**: Choose the type of audit you want to conduct
-2. **Audit period**: Select the semester and year
+2. **Audit period**: Select the month and year
 3. **Team leader**: Enter the team leader's name in the text field
 4. **Team Members**: Enter the team Members's name in the text field up to 5 Members
 5. **Department management**:
@@ -69,7 +69,7 @@ Displays the complete audit results including:
 When generating a PDF:
 
 - **File naming**: Automatically saved as:  
-  `[Date]_[Department]_[Area].pdf`
+  `[Audit Type]_[Date]_[Department]_[Area].pdf`
   
 - **Storage location**:  
   `Internal Storage/Download/Brum PDF Files/`

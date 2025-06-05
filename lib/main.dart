@@ -5,9 +5,15 @@ import 'history.dart'; // Import the HistoryPage
 import 'route_observer.dart'; // Add this imp
 
 
-void main() {
+Future<void> main() async {
+  // Required for async operations before runApp()
+
+  
+
+  
   runApp(MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -16,10 +22,17 @@ class MyApp extends StatelessWidget {
       title: 'Department and Area Selector',
       navigatorObservers: [routeObserver], // Add RouteObserver
       theme: ThemeData(
-        scaffoldBackgroundColor: Color.fromARGB(255, 255, 255, 255),
-       textTheme: GoogleFonts.montserratTextTheme(
-          Theme.of(context).textTheme,
-        ), // Applies Montserrat globally
+        fontFamily: 'Montserrat',
+     textTheme: TextTheme(
+ 
+    displayLarge: TextStyle(fontWeight: FontWeight.w300),
+    displayMedium: TextStyle(fontWeight: FontWeight.w300),
+    titleLarge: TextStyle(fontWeight: FontWeight.w600),
+    bodyLarge: TextStyle(), 
+    labelSmall: TextStyle(),
+    bodyMedium: TextStyle(), 
+    
+  ),
       ),
       home: HistoryPage(),
      

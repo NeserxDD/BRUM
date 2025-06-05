@@ -336,37 +336,35 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
       }
     }
 
-
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => ResultPage(
-          checklistResultId: checklistResultId,
-          departmentName: widget.departmentName,
-          areaName: widget.areaName,
-          personName: widget.personName,
-          totalScore: totalScore,
-          maxPossibleScore: maxPossibleScore,
-          questions: questions,
-          formattedDate: formattedDate,
-          senbetsu1Score: senbetsu1Score,
-          seiton2Score: seiton2Score,
-          seiso3Score: seiso3Score,
-          seiketsu4Score: seiketsu4Score,
-          shitsuke5Score: shitsuke5Score,
-          jishuku6Score: jishuku6Score,
-          anzen7Score: anzen7Score,
-          taikekasuru8Score: taikekasuru8Score,
-          pointsPerQuestion: pointsPerQuestion,
-          maxTotalScore: maxTotalScore,
-          auditType: widget.auditType,
-          auditPeriod: widget.auditPeriod,
-          teamMembers: widget.teamMembers,
-        ),
+        builder:
+            (context) => ResultPage(
+              checklistResultId: checklistResultId,
+              departmentName: widget.departmentName,
+              areaName: widget.areaName,
+              personName: widget.personName,
+              totalScore: totalScore,
+              maxPossibleScore: maxPossibleScore,
+              questions: questions,
+              formattedDate: formattedDate,
+              senbetsu1Score: senbetsu1Score,
+              seiton2Score: seiton2Score,
+              seiso3Score: seiso3Score,
+              seiketsu4Score: seiketsu4Score,
+              shitsuke5Score: shitsuke5Score,
+              jishuku6Score: jishuku6Score,
+              anzen7Score: anzen7Score,
+              taikekasuru8Score: taikekasuru8Score,
+              pointsPerQuestion: pointsPerQuestion,
+              maxTotalScore: maxTotalScore,
+              auditType: widget.auditType,
+              auditPeriod: widget.auditPeriod,
+              teamMembers: widget.teamMembers,
+            ),
       ),
     );
-
-
   }
 
   @override
@@ -383,7 +381,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
           backgroundColor: const Color.fromARGB(255, 45, 103, 161),
           iconTheme: IconThemeData(color: Colors.white),
           title: Text(
-            'Audit Questions',
+            '8s Requirement',
             style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
@@ -394,7 +392,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
                 slivers: [
                   SliverAppBar(
                     automaticallyImplyLeading: false,
-                    expandedHeight: 200 + (widget.teamMembers.length * 20.0),
+                    expandedHeight: 245 + (widget.teamMembers.length * 40.0),
                     floating: false,
                     pinned: false,
                     snap: false,
@@ -427,7 +425,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
                             Text(
                               'Department: ${widget.departmentName}',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -437,7 +435,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
                               Text(
                                 'Area: ${widget.areaName}',
                                 style: const TextStyle(
-                                  fontSize: 16,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -447,7 +445,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
                             Text(
                               'Audit Period: ${widget.auditPeriod}',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -456,7 +454,7 @@ class _ChecklistScreenState extends State<ChecklistScreen> with RouteAware {
                             Text(
                               'Team Leader: ${widget.personName}',
                               style: const TextStyle(
-                                fontSize: 16,
+                                fontSize: 14,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -697,20 +695,19 @@ class __QuestionItemState extends State<_QuestionItem> {
       setState(() {
         _imagePaths.add(pickedFile.path);
         widget.question["imagePaths"] = _imagePaths;
-      
 
-
-  // Add image code to remarks if it's not already there
-      final imageCodeText = "image code: $_imageCode";
-      if (!_remarkController.text.contains(imageCodeText)) {
-        if (_remarkController.text.isEmpty) {
-          _remarkController.text = imageCodeText;
-        } else {
-          _remarkController.text = "$imageCodeText\n${_remarkController.text}";
+        // Add image code to remarks if it's not already there
+        final imageCodeText = "image code: $_imageCode";
+        if (!_remarkController.text.contains(imageCodeText)) {
+          if (_remarkController.text.isEmpty) {
+            _remarkController.text = imageCodeText;
+          } else {
+            _remarkController.text =
+                "$imageCodeText\n${_remarkController.text}";
+          }
         }
-      }
-   });
-      
+      });
+
       // Include current answer when updating
       widget.onAnswerUpdated(
         widget.questionIndex,
@@ -842,7 +839,7 @@ class __QuestionItemState extends State<_QuestionItem> {
         const SizedBox(height: 8),
         ElevatedButton.icon(
           icon: const Icon(Icons.add_a_photo),
-          label: const Text('Add Photo'),
+          label: const Text('Attach Photo'),
           onPressed: _showImagePickerDialog,
         ),
         if (_imagePaths.isNotEmpty) ...[
@@ -870,16 +867,17 @@ class __QuestionItemState extends State<_QuestionItem> {
                       right: 0,
                       child: IconButton(
                         icon: const Icon(Icons.close, color: Colors.red),
-                        onPressed: () { 
+                        onPressed: () {
                           setState(() {
                             _imagePaths.removeAt(index);
                             widget.question["imagePaths"] = _imagePaths;
 
-        if (_imagePaths.isEmpty) {
-          final imageCodeText = "image code: $_imageCode";
-          _remarkController.text = _remarkController.text.replaceAll("$imageCodeText\n", "")
-                                                         .replaceAll(imageCodeText, "");
-        }                            
+                            if (_imagePaths.isEmpty) {
+                              final imageCodeText = "image code: $_imageCode";
+                              _remarkController.text = _remarkController.text
+                                  .replaceAll("$imageCodeText\n", "")
+                                  .replaceAll(imageCodeText, "");
+                            }
                           });
                           widget.onAnswerUpdated(
                             widget.questionIndex,

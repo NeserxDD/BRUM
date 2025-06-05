@@ -469,7 +469,9 @@ class DatabaseHelper {
     );
     
     if (images.isEmpty) {
+      
       return baseCode; // Return base code if no images exist
+
     }
     
     // Find the highest suffix number

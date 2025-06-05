@@ -80,12 +80,23 @@ flutter:
   assets:
     - lib\assets\fonts\pangasinan_logo.png # Ensure this path is correct
     - lib\assets\fonts\timesbold.ttf
+    - lib\assets\fonts\Montserrat-Regular.ttf
+    - lib\assets\fonts\Montserrat-Bold.ttf
+    - lib\assets\fonts\Montserrat-ExtraBold.ttf
     - lib\assets\fonts\sliver.png
     - lib\assets\fonts\head.png
     - lib\assets\fonts\sliver_w.png
     - lib\assets\manualText.md
 
-
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: lib/assets/fonts/Montserrat-Regular.ttf
+          weight: 400  # Regular
+        - asset: lib/assets/fonts/Montserrat-Bold.ttf
+          weight: 700  # Bold
+        - asset: lib/assets/fonts/Montserrat-ExtraBold.ttf
+          weight: 800  # ExtraBold
 
 
 flutter_launcher_icons:

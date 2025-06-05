@@ -7,6 +7,7 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:share_plus/share_plus.dart';
 // import 'package:path_provider/path_provider.dart';
 import 'dart:io';
+const PdfPageFormat folio = PdfPageFormat(8.5 * PdfPageFormat.inch, 13 * PdfPageFormat.inch);
 
 class PdfGenerator {
   final String departmentName;
@@ -55,6 +56,11 @@ class PdfGenerator {
 
   // Method to group questions by category
 
+
+  String get semesterOnly {
+    // Split the auditPeriod string and take the first part (before space)
+    return auditPeriod.split(' ')[0];
+  }
   List<pw.Page> _buildImagesPages(pw.ThemeData theme, Uint8List logoImage) {
     final questionsWithImages =
         questions
@@ -132,7 +138,7 @@ class PdfGenerator {
       pages.add(
         pw.Page(
           margin: const pw.EdgeInsets.fromLTRB(30, 10, 30, 20),
-          pageFormat: PdfPageFormat.legal,
+          pageFormat: folio,
           build: (pw.Context context) {
             return pw.Theme(
               data: theme,
@@ -267,8 +273,8 @@ class PdfGenerator {
 
       pdf.addPage(
         pw.Page(
-          margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 1),
-          pageFormat: PdfPageFormat.legal,
+          margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 3),
+          pageFormat: folio,
           build: (pw.Context context) {
             return pw.Stack(
               children: [
@@ -298,7 +304,7 @@ class PdfGenerator {
 
                             pw.SizedBox(height: 15),
                             pw.Text(
-                              '8S of Good Housekeeping Checklist',
+                              '8S of Good Housekeeping Checklist - SOFT S',
                               style: pw.TextStyle(
                                 fontSize: 18,
                                 fontWeight: pw.FontWeight.bold,
@@ -366,7 +372,21 @@ class PdfGenerator {
                           ],
                         ),
                       ),
-
+                      pw.Container(
+                        alignment: pw.Alignment.centerLeft,
+                        child: pw.Column(
+                          children: [
+                            pw.Text(
+                              'Audit Period:  $auditPeriod',
+                              style: pw.TextStyle(
+                                fontSize: 14,
+                                fontWeight: pw.FontWeight.bold,
+                              ),
+                              textAlign: pw.TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
                       pw.Container(
                         alignment: pw.Alignment.centerLeft,
                         child: pw.Column(
@@ -490,7 +510,7 @@ class PdfGenerator {
                                   ),
                                 ),
 
-                                pw.SizedBox(height: 20),
+                                pw.SizedBox(height: 30),
                                 pw.Text(
                                   '________________________',
                                   textAlign: pw.TextAlign.center,
@@ -513,7 +533,7 @@ class PdfGenerator {
                                     fontWeight: pw.FontWeight.bold,
                                   ),
                                 ),
-                                pw.SizedBox(height: 20),
+                                pw.SizedBox(height: 30),
 
                                 pw.Text('________________________'),
                                 pw.Text(
@@ -531,7 +551,7 @@ class PdfGenerator {
                 ),
 
                 pw.Positioned(
-                  bottom: 0, // Now touches the page edge
+                  bottom: 1, // Now touches the page edge
                   left: 0,
                   right: 0,
 
@@ -552,7 +572,7 @@ children: [
 
  pw.Container(
                     height: 15, // Matches reduced bottom margin
-                    alignment: pw.Alignment.center,
+                    alignment: pw.Alignment.bottomCenter,
                     child: pw.Text(
                       '8s of Good Housekeeping Checklist',
                       style: const pw.TextStyle(
@@ -566,7 +586,7 @@ children: [
                     height: 15, // Matches reduced bottom margin
                     alignment: pw.Alignment.bottomRight,
                     child: pw.Text(
-                      'EGCD KCP',
+                      'ED|KC|EV',
                       style: const pw.TextStyle(
                         fontSize: 8,
                         color: PdfColors.black,
@@ -597,7 +617,7 @@ children: [
         pdf.addPage(
           pw.Page(
             margin: pw.EdgeInsets.fromLTRB(30, 10, 30, 0),
-            pageFormat: PdfPageFormat.legal,
+            pageFormat: folio,
             build: (pw.Context context) {
               return pw.Theme(
                 // Set the default font for all text in this theme
@@ -917,6 +937,6 @@ children: [
   String _getFileName() {
     DateTime dateTime = DateFormat('yyyy-MM-dd hh:mm a').parse(formattedDate);
     final String newFormattedDate = DateFormat('yyyy-MM-dd').format(dateTime);
-    return "${newFormattedDate}_${personName}-${departmentName}.pdf";
+    return "SOFT_S_${newFormattedDate}_${personName}-${departmentName}.pdf";
   }
 }
